@@ -62,6 +62,7 @@ public class DeviceGroup extends AbstractBehavior<Command> {
         if (this.groupId.equals(registerDeviceReq.getGroupId())) {
             ActorRef<Command> deviceActor = deviceIdToActor.get(registerDeviceReq.getDeviceId());
             if (deviceActor != null) {
+                getContext().getLog().info("Device actor {} is exist", registerDeviceReq.getDeviceId());
                 registerDeviceReq.getReplyTo().tell(new RegisterDeviceRes(deviceActor));
             } else {
                 getContext().getLog().info("Creating device actor for {}", registerDeviceReq.getDeviceId());
