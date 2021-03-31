@@ -7,6 +7,7 @@ import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 import example.iot.message.Command;
+import example.iot.message.DeviceTerminatedReq;
 import example.iot.message.QueryDeviceTemperatureReq;
 import example.iot.message.QueryDeviceTemperatureRes;
 import example.iot.message.UploadTemperatureReq;
@@ -50,13 +51,7 @@ public class Device extends AbstractBehavior<Command> {
     public static Behavior<Command> create(String groupId, String deviceId) {
         return Behaviors.setup(context -> new Device(context, groupId, deviceId));
     }
-
-
-    static enum Passivate implements Command {
-        INSTANCE
-    }
-
-
+    
     /**
      * 定义消息和信号接收的类型，以及对应处理的逻辑
      */
@@ -65,7 +60,7 @@ public class Device extends AbstractBehavior<Command> {
         return newReceiveBuilder()
             .onMessage(UploadTemperatureReq.class, this::onUploadTemperature)
             .onMessage(QueryDeviceTemperatureReq.class, this::onQueryDeviceTemperature)
-            .onMessage(Passivate.class, m -> Behaviors.stopped())
+            .onMessage(DeviceTerminatedReq.class, m -> Behaviors.stopped())
             .onSignal(PostStop.class, signal -> onPostStop())
             .build();
     }
