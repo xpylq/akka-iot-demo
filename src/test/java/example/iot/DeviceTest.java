@@ -29,6 +29,9 @@ public class DeviceTest {
     @ClassRule
     public static final TestKitJunitResource testKit = new TestKitJunitResource();
 
+    /**
+     * 设备注册
+     */
     @Test
     public void testRegisterDevice() throws Exception {
         TestProbe<RegisterDeviceRes> device1 = testKit.createTestProbe(RegisterDeviceRes.class);
@@ -48,6 +51,9 @@ public class DeviceTest {
         Assert.assertEquals(deviceRes1.getDevice(), deviceRes3.getDevice());
     }
 
+    /**
+     * 查询设备组中的所有设备
+     */
     @Test
     public void testQueryDeviceList() throws Exception {
         TestProbe<RegisterDeviceRes> device1 = testKit.createTestProbe(RegisterDeviceRes.class);

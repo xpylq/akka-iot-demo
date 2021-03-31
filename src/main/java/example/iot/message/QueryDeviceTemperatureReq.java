@@ -11,15 +11,15 @@ import akka.actor.typed.ActorRef;
  */
 public class QueryDeviceTemperatureReq implements Command {
 
-    private final long requestId;
+    private final String requestId;
     private final ActorRef<QueryDeviceTemperatureRes> replyTo;
 
-    public QueryDeviceTemperatureReq(long requestId, ActorRef<QueryDeviceTemperatureRes> replyTo) {
+    public QueryDeviceTemperatureReq(String requestId, ActorRef<QueryDeviceTemperatureRes> replyTo) {
         this.requestId = requestId;
         this.replyTo = replyTo;
     }
 
-    public long getRequestId() {
+    public String getRequestId() {
         return requestId;
     }
 

@@ -79,7 +79,7 @@ public class Device extends AbstractBehavior<Command> {
     }
 
     private Behavior<Command> onQueryDeviceTemperature(QueryDeviceTemperatureReq r) {
-        r.getReplyTo().tell(new QueryDeviceTemperatureRes(r.getRequestId(), lastTemperatureReading));
+        r.getReplyTo().tell(new QueryDeviceTemperatureRes(r.getRequestId(), this.deviceId, lastTemperatureReading));
         return this;
     }
 
